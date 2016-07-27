@@ -1,54 +1,8 @@
 ﻿/*
- *@高京
- *@20150909
- *@每个项目自带方法，添加方法的话：1.请先确认没有功能类同的方法可以使用（避免同一功能多个类同方法存在）；2.要尽量考虑可移植性和复用性，不要为了实现某一单一功能而增加本文件代码量；
-                                   3.将调用方法写在顶部注释中；4.有新方法添加时，在群里吼一声
- */
-
-/*
+    1.0.2
     高京
-
-        *复制对象（网上抄的）
-        *myObj：源对象
-        clone(myObj)
-
-        *插入css3的keyframes rule
-        *style：rule
-        insert_keyframe(style)
-
-        *监听webkitAnimation
-        *selector：要监听的selector
-        *Callback_end：animation结束时的回调，可为null
-        *Callback_start：animation开始时的回调，可为null
-        *Callback_iteration：animation进行循环时的回调，可为null
-        webkitAnimationListen(selector, Callback_end, Callback_start, Callback_iteration)
-
-        *移动端解决微信浏览器上下灰条并执行内部移动
-        *selector: 固定高度的盒选择器。如.panel
-        *overflow_scrolling：是否执行盒内部移动。true-移动 else-不移动
-        mobile_stop_moved(selector, overflow_scrolling)
-
-        *获得地址栏参数集，返回JSON对象
-        getQueryParas() 
-
-        *自动获得地址栏参数集，并拼接返回为地址栏字符串：a=1&b=2&c=3
-        *Para：过滤掉的参数名（键），多个用|分隔，区分大小写
-        transParameters(Para)
-
-        *在页面中引用其他js文件
-        *path：引用文件路径
-        includeJS(path)
-
-        *在页面中引用其他CSS文件
-        *path：引用文件路径
-        includeCSS(path)
-
-        *判断是否为PC端访问，返回true/false
-        isPc()
-    陈斌
-        * 传入字符串。返回字符串长度数值
-        * Str 字符串
-        StrLength(Str)
+    2015-09-09
+    JS类库
 */
 
 $(function() {
@@ -57,21 +11,65 @@ $(function() {
         e.preventDefault();
         functions.li_click($(this));
     });
-    /*$(".li_click").click(function() {
-        functions.li_click($(this));
-    });
-
-    $(".li_click").on("touchstart",function() {
-        functions.li_click($(this));
-    });
-
-    $(".ct").click(function() {
-        alert("后续推出，敬请期待！");
-        return false;
-    });*/
 });
 
 var functions = {
+
+    /*
+        高京
+        2016-07-27
+        改变容器的scrollTop属性动画方法——解决zepto不支持animate改变scrollTop的动画问题
+        
+        opt = {
+            obj_selector: "div.box", // 滚动元素。默认：window
+            toTop_px: 0, // 滚至位置，像素。默认：0
+            durTime_ms: 200, // 滚动至toTop_px所用时间，毫秒。默认：200
+            callback: function(){} // 回调方法
+        };
+
+        使用时可以先用animate尝试改变，成功后再次调用此方法。如：
+            $("html,body").animate({ scrollTop: "0px" }, 200, function() {
+                functions.scrollTop({
+                    callback: function() {
+                        console.log("success");
+                    }
+                });
+            });
+    */
+    scrollTop: function(opt) {
+        var opt_default = {
+            obj_selector: window,
+            toTop_px: 0,
+            durTime_ms: 200
+        };
+        opt = $.extend(opt_default, opt);
+
+        if (opt.obj_selector === "window")
+            opt.obj_selector = window;
+
+        var perTime = 20;
+
+        var scrollTop_selector = opt.obj_selector == window ? "html,body" : opt.obj_selector;
+        var obj = $(opt.obj_selector);
+        var top_now_px = obj.scrollTop();
+        var top_per_px = (opt.toTop_px - top_now_px) / opt.durTime_ms * perTime;
+
+        var set_scrollTop = function() {
+            obj.scrollTop(obj.scrollTop() + top_per_px);
+            var stop_toTop_bool = top_per_px <= 0 && obj.scrollTop() <= opt.toTop_px;
+            var stop_toDown_bool = top_per_px >= 0 && obj.scrollTop() >= opt.toTop_px;
+            if (stop_toTop_bool || stop_toDown_bool) {
+                if (opt.callback)
+                    opt.callback();
+                return;
+            } else
+                setTimeout(function() {
+                    set_scrollTop();
+                }, perTime);
+        };
+
+        set_scrollTop();
+    },
 
     /*
         高京
@@ -352,4 +350,11 @@ var functions = {
 
         return _l;
     }
+}
+
+
+if (typeof define === "function" && define.amd) {
+    define(function() {
+        return functions;
+    });
 }
