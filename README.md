@@ -1,19 +1,5 @@
-# JS类库 v1.0.2
-###兼容原生JS和AMD规范
+# JS类库 v1.0.3
 ###安装：npm install TopuNet-js-functions
-
-更新日志：
--------------
-
-v1.0.2
-
-        1. 增加方法scrollTop
-        2. 完善readme
-
-v1.0.1
-
-        1. 创建项目并发布到github
-        2. 发布到npm：TopuNet/js-functions
 
 文件结构：
 -------------
@@ -22,11 +8,13 @@ v1.0.1
 方法列表：
 -------------
 
-1. 自动对li_click的类进行点击监听，并根据target和url参数进行页面跳转。如：
+1. 自动对 ".li_click" 的DOM进行 click 监听，并根据target和url参数进行页面跳转。如：
 
 		<li class="li_click" target="_blank" url="http://www.topu.net"></li>
 		
 		<div class="li_click" target="_self" url="http://www.51icb.com"></li>
+
+2. 自动对 ".li_touchstart" 的DOM进行 touchstart mousedown 的监听，功能和实例同上。
 
 高京
 
@@ -104,3 +92,18 @@ v1.0.1
          传入字符串。返回字符串长度数值
          Str 字符串
         
+更新日志：
+-------------
+v1.0.3
+
+        1. 增加监听 li_touchstart
+
+v1.0.2
+
+        1. 增加方法scrollTop
+        2. 完善readme
+
+v1.0.1
+
+        1. 创建项目并发布到github
+        2. 发布到npm：TopuNet/js-functions

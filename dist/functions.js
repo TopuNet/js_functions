@@ -1,14 +1,17 @@
 ﻿/*
-    1.0.2
+    1.0.3
     高京
-    2015-09-09
+    2016-08-29
     JS类库
 */
 
 $(function() {
-
-    $(".li_click").on("touchstart mousedown", function(e) {
+    $(".li_touchstart").on("touchstart mousedown", function(e) {
         e.preventDefault();
+        functions.li_click($(this));
+    })
+
+    $(".li_click").on("click", function(e) {
         functions.li_click($(this));
     });
 });
