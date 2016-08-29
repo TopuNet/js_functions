@@ -14,7 +14,7 @@
 		
 		<div class="li_click" target="_self" url="http://www.51icb.com"></li>
 
-2. 自动对 ".li_touchstart" 的DOM进行 touchstart mousedown 的监听，功能和实例同上。
+2. 自动对 ".li_touchstart" 的DOM进行 touchstart mousedown 的监听，功能和示例同上。
 
 高京
 
