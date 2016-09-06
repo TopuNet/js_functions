@@ -1,44 +1,24 @@
 ﻿/*
-    1.0.3
+    1.0.4
     高京
     2016-08-29
     JS类库
 */
 
-$(function() {
-    $(".li_touchstart").on("touchstart mousedown", function(e) {
-        e.preventDefault();
-        functions.li_click($(this));
-    })
-
-    $(".li_click").on("click", function(e) {
-        functions.li_click($(this));
-    });
-});
-
 var functions = {
+    init: function() {
 
-    /*
-        高京
-        2016-07-27
-        改变容器的scrollTop属性动画方法——解决zepto不支持animate改变scrollTop的动画问题
-        
-        opt = {
-            obj_selector: "div.box", // 滚动元素。默认：window
-            toTop_px: 0, // 滚至位置，像素。默认：0
-            durTime_ms: 200, // 滚动至toTop_px所用时间，毫秒。默认：200
-            callback: function(){} // 回调方法
-        };
+        $(function() {
+            $(".li_touchstart").on("touchstart mousedown", function(e) {
+                e.preventDefault();
+                functions.li_click($(this));
+            })
 
-        使用时可以先用animate尝试改变，成功后再次调用此方法。如：
-            $("html,body").animate({ scrollTop: "0px" }, 200, function() {
-                functions.scrollTop({
-                    callback: function() {
-                        console.log("success");
-                    }
-                });
+            $(".li_click").on("click", function(e) {
+                functions.li_click($(this));
             });
-    */
+        });
+    },
     scrollTop: function(opt) {
         var opt_default = {
             obj_selector: window,
@@ -357,7 +337,11 @@ var functions = {
 
 
 if (typeof define === "function" && define.amd) {
-    define(function() {
+    define(["lib/jquery.min"], function() {
+        functions.init();
         return functions;
     });
+}
+else{
+    functions.init();
 }

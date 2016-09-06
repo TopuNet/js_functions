@@ -1,4 +1,4 @@
-# JS类库 v1.0.3
+# JS类库 v1.0.4
 ###安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -94,6 +94,10 @@
         
 更新日志：
 -------------
+v1.0.4
+
+        1. 修复bug
+
 v1.0.3
 
         1. 增加监听 li_touchstart
