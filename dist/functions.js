@@ -1,5 +1,5 @@
 ﻿/*
-    1.0.4
+    1.0.5
     高京
     2016-08-29
     JS类库
@@ -12,13 +12,36 @@ var functions = {
             $(".li_touchstart").on("touchstart mousedown", function(e) {
                 e.preventDefault();
                 functions.li_click($(this));
-            })
+            });
 
-            $(".li_click").on("click", function(e) {
+            $(".li_click").on("click", function() {
                 functions.li_click($(this));
             });
         });
     },
+    /*
+        高京
+        2016-09-10
+
+        改变容器的scrollTop属性动画方法——解决zepto不支持animate改变scrollTop的动画问题
+        
+        opt = {
+            obj_selector: "div.box", // 滚动元素。默认：window
+            toTop_px: 0, // 滚至位置，像素。默认：0
+            durTime_ms: 200, // 滚动至toTop_px所用时间，毫秒。默认：200
+            callback: function(){} // 回调方法
+        };
+
+        使用时可以先用animate尝试改变，成功后再次调用此方法。如：
+            $("html,body").animate({ scrollTop: "0px" }, 200, function() {
+                functions.scrollTop({
+                    callback: function() {
+                        console.log("success");
+                    }
+                });
+            });
+    */
+
     scrollTop: function(opt) {
         var opt_default = {
             obj_selector: window,
@@ -33,7 +56,7 @@ var functions = {
         var perTime = 20;
 
         var scrollTop_selector = opt.obj_selector == window ? "html,body" : opt.obj_selector;
-        var obj = $(opt.obj_selector);
+        var obj = $(scrollTop_selector);
         var top_now_px = obj.scrollTop();
         var top_per_px = (opt.toTop_px - top_now_px) / opt.durTime_ms * perTime;
 
@@ -62,9 +85,9 @@ var functions = {
     */
     clone: function(myObj) {
         if (typeof(myObj) != 'object') return myObj;
-        if (myObj == null) return myObj;
+        if (myObj === null) return myObj;
 
-        var myNewObj = new Object();
+        var myNewObj = {};
 
         for (var i in myObj)
             myNewObj[i] = functions.clone(myObj[i]);
@@ -128,7 +151,7 @@ var functions = {
             $(selector).css("-webkit-overflow-scrolling", "touch");
             $("body").on('touchstart', selector, function(e) {
                 var el = e.currentTarget;
-                if (el.scrollTop == 0) {
+                if (el.scrollTop === 0) {
                     el.scrollTop = 1;
                 } else if (el.scrollHeight == el.scrollTop + el.offsetHeight) {
                     el.scrollTop = el.scrollTop - 1;
@@ -137,7 +160,7 @@ var functions = {
             });
             $("body").on('touchmove', selector, function(e) {
                 var el = e.currentTarget;
-                if (el.scrollTop == 0)
+                if (el.scrollTop === 0)
                     return;
                 e.stopPropagation();
             });
@@ -160,7 +183,7 @@ var functions = {
             sub.dispatchEvent(e);
         }
         //!safari
-        catch (e) {
+        catch (ee) {
             $("#link_new_window span").click();
         }
     },
@@ -263,7 +286,7 @@ var functions = {
                     value = url.substring(0, e);
                 url = url.substring(e + 1);
                 e = url.indexOf("=");
-                if (str != "") {
+                if (str !== "") {
                     if (Kind == 1)
                         str += ",";
                     else
@@ -299,23 +322,23 @@ var functions = {
         //检测平台
         var p = navigator.platform;
         //alert(p);
-        system.win = p.indexOf("Win") == 0;
-        system.mac = p.indexOf("Mac") == 0;
-        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+        system.win = p.indexOf("Win") === 0;
+        system.mac = p.indexOf("Mac") === 0;
+        system.x11 = (p === "X11") || (p.indexOf("Linux") === 0);
 
         if (system.win || system.mac || system.xll) {
             return true;
         } else {
             return false;
         }
-    }
+    },
 
     /*
      *@陈斌
      *@20160103
      * 传入字符串。返回字符串长度数值
      */
-    ,
+    
     StrLength: function(Str) {
         var _i = 0;
         var _n = Str.length;
@@ -333,7 +356,7 @@ var functions = {
 
         return _l;
     }
-}
+};
 
 
 if (typeof define === "function" && define.amd) {

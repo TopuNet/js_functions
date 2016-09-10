@@ -1,4 +1,4 @@
-# JS类库 v1.0.4
+# JS类库 v1.0.5
 ###安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -94,6 +94,11 @@
         
 更新日志：
 -------------
+v1.0.5
+
+        1. 通过jshint
+        2. scrollTop方法莫名其妙的和goto_top模块的scrollTop逻辑不一样，改了，没测试。
+
 v1.0.4
 
         1. 修复bug
