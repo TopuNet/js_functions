@@ -1,5 +1,5 @@
 # JS类库 v1.0.5
-###安装：npm install TopuNet-js-functions
+### 安装：npm install TopuNet-js-functions
 
 文件结构：
 -------------
