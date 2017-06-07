@@ -1,4 +1,4 @@
-# JS类库 v1.0.5
+# JS类库 v1.0.6
 ### 安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -17,6 +17,12 @@
 2. 自动对 ".li_touchstart" 的DOM进行 touchstart mousedown 的监听，功能和示例同上。
 
 高京
+
+1. calculate(kind, cal1, cal2)
+        
+        乘除法计算，解决小数计算误差
+        
+        kind：1-乘法（cal1×cal2） 2-除法（cal1÷cal2）
 
 1. scrollTop(opt)
 
@@ -94,6 +100,10 @@
         
 更新日志：
 -------------
+v1.0.6
+
+        1. 增加方法calculate
+
 v1.0.5
 
         1. 通过jshint

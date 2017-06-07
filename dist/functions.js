@@ -1,5 +1,5 @@
 ﻿/*
-    1.0.5
+    1.0.6
     高京
     2016-08-29
     JS类库
@@ -19,6 +19,51 @@ var functions = {
             });
         });
     },
+    /*
+        高京
+        2017-06-07
+        乘除法计算，解决小数计算误差
+        * kind：1-乘法（cal1×cal2） 2-除法（cal1÷cal2）
+    */
+    calculate: function(kind, cal1, cal2) {
+        cal1 = cal1 || 1;
+        cal2 = cal2 || 1;
+        var lastDealNum = 0,
+            i,
+            str1 = cal1.toString(),
+            str2 = cal2.toString(),
+            str_lastDealNum = "1";
+
+        // 根据小数点位置，获取需要处理的倍数
+        var get_lastDealNum = function(str) {
+            i = str.indexOf(".");
+            if (i == -1)
+                return 0;
+            else
+                return str.length - i - 1;
+        };
+
+        // 累加str1和str2对应的倍数
+        lastDealNum += get_lastDealNum(str1);
+        lastDealNum += get_lastDealNum(str2);
+
+        // 根据需要处理的倍数，生成最后处理的数
+        for (i = 0; i < lastDealNum; i++) {
+            str_lastDealNum += "0";
+        }
+
+        // 计算
+        switch (kind) {
+            case 1:
+                return parseFloat(str1.replace(".", "")) * parseFloat(str2.replace(".", "")) / parseFloat(str_lastDealNum);
+            case 2:
+                return parseFloat(str1.replace(".", "")) / parseFloat(str2.replace(".", "")) / parseFloat(str_lastDealNum);
+            default:
+                return 0;
+
+        }
+    },
+
     /*
         高京
         2016-09-10
@@ -338,7 +383,7 @@ var functions = {
      *@20160103
      * 传入字符串。返回字符串长度数值
      */
-    
+
     StrLength: function(Str) {
         var _i = 0;
         var _n = Str.length;
@@ -364,7 +409,6 @@ if (typeof define === "function" && define.amd) {
         functions.init();
         return functions;
     });
-}
-else{
+} else {
     functions.init();
 }
