@@ -1,5 +1,5 @@
 ﻿/*
-    1.0.6
+    1.0.7
     高京
     2016-08-29
     JS类库
@@ -107,9 +107,11 @@ var functions = {
 
         var set_scrollTop = function() {
             obj.scrollTop(obj.scrollTop() + top_per_px);
-            var stop_toTop_bool = top_per_px <= 0 && obj.scrollTop() <= opt.toTop_px;
-            var stop_toDown_bool = top_per_px >= 0 && obj.scrollTop() >= opt.toTop_px;
+            var stop_toTop_bool = top_per_px <= 0 && (obj.scrollTop()+top_per_px) <= opt.toTop_px;
+            var stop_toDown_bool = top_per_px >= 0 && (obj.scrollTop()+top_per_px) >= opt.toTop_px;
             if (stop_toTop_bool || stop_toDown_bool) {
+                obj.scrollTop(opt.toTop_px);
+
                 if (opt.callback)
                     opt.callback();
                 return;

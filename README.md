@@ -1,4 +1,4 @@
-# JS类库 v1.0.6
+# JS类库 v1.0.7
 ### 安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -100,6 +100,9 @@
         
 更新日志：
 -------------
+v1.0.7
+        1. 修改scrollTop的小问题。
+
 v1.0.6
 
         1. 增加方法calculate
