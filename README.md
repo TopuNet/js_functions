@@ -1,4 +1,4 @@
-# JS类库 v1.0.7
+# JS类库 v1.0.8
 ### 安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -17,6 +17,12 @@
 2. 自动对 ".li_touchstart" 的DOM进行 touchstart mousedown 的监听，功能和示例同上。
 
 高京
+
+1. fix_ios_fixed_bottom_input(dom_selector)
+
+        解决ios端fixed居底input被键盘遮挡的问题
+
+        dom_selector: 监听focus和blur的Dom的选择器
 
 1. calculate(kind, cal1, cal2)
         
@@ -100,6 +106,10 @@
         
 更新日志：
 -------------
+v1.0.8
+
+        1. 增加方法fix_ios_fixed_bottom_input
+
 v1.0.7
 
         1. 修改scrollTop的小问题。

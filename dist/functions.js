@@ -1,5 +1,5 @@
 ﻿/*
-    1.0.7
+    1.0.8
     高京
     2016-08-29
     JS类库
@@ -17,6 +17,39 @@ var functions = {
             $(".li_click").on("click", function() {
                 functions.li_click($(this));
             });
+        });
+    },
+    /*
+        高京
+        2017-08-02
+        解决ios端fixed居底input被键盘遮挡的问题
+        @dom_selector: 监听focus和blur的Dom的选择器
+    */
+    fix_ios_fixed_bottom_input: function(dom_selector) {
+
+        // 安卓orIOS
+        // var device;
+        if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+            // device = "ios";
+        } else {
+            return;
+        }
+
+        // alert("ios");
+
+        var interval,
+            footer_input = $(dom_selector),
+            bfscrolltop = document.body.scrollTop; //获取软键盘唤起前浏览器滚动部分的高度
+
+        footer_input.focus(function() {
+            interval = setInterval(function() { //设置一个计时器，时间设置与软键盘弹出所需时间相近
+                document.body.scrollTop = document.body.scrollHeight; //获取焦点后将浏览器内所有内容高度赋给浏览器滚动部分高度
+                // alert(document.body.scrollTop);
+                // alert(document.body.scrollHeight);
+            }, 100);
+        }).blur(function() { //设定输入框失去焦点时的事件
+            clearInterval(interval); //清除计时器
+            document.body.scrollTop = bfscrolltop; //将软键盘唤起前的浏览器滚动部分高度重新赋给改变后的高度
         });
     },
     /*
@@ -107,8 +140,8 @@ var functions = {
 
         var set_scrollTop = function() {
             obj.scrollTop(obj.scrollTop() + top_per_px);
-            var stop_toTop_bool = top_per_px <= 0 && (obj.scrollTop()+top_per_px) <= opt.toTop_px;
-            var stop_toDown_bool = top_per_px >= 0 && (obj.scrollTop()+top_per_px) >= opt.toTop_px;
+            var stop_toTop_bool = top_per_px <= 0 && (obj.scrollTop() + top_per_px) <= opt.toTop_px;
+            var stop_toDown_bool = top_per_px >= 0 && (obj.scrollTop() + top_per_px) >= opt.toTop_px;
             if (stop_toTop_bool || stop_toDown_bool) {
                 obj.scrollTop(opt.toTop_px);
 
