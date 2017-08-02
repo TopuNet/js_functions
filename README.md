@@ -1,4 +1,4 @@
-# JS类库 v1.0.9
+# JS类库 v1.0.10
 ### 安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -112,6 +112,10 @@
         
 更新日志：
 -------------
+v1.0.10
+
+        1. 修改bug
+
 v1.0.9
 
         1. 增加方法dateFormat_wx
