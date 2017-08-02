@@ -1,5 +1,5 @@
 ﻿/*
-    1.0.8
+    1.0.9
     高京
     2016-08-29
     JS类库
@@ -19,6 +19,51 @@ var functions = {
             });
         });
     },
+    /*
+        高京
+        2017-08-02
+        日期格式化_仿微信
+        @_date: 日期
+    */
+    dateFormat_wx: function(_date) {
+
+        var date = new Date(_date);
+
+        var year = date.getFullYear(),
+            month = date.getMonth() + 1,
+            day = date.getDate(),
+            hour = date.getHours(),
+            minute = date.getMinutes();
+
+        var str = "";
+        date = new Date();
+
+        if (date.getFullYear() == year && date.getMonth() + 1 == month && date.getDate() == day)
+            str = "";
+        else {
+            str = year + "年";
+            // if (month < 10)
+            //     str += "0";
+            str += month + "月";
+            // if (day < 10)
+            //     str += "0";
+            str += day + "日 ";
+        }
+
+
+        if (hour < 10)
+            str += "0";
+        str += hour + ":";
+        if (minute < 10)
+            str += "0";
+        str += minute;
+        // str += ":";
+        // if (second < 10)
+        //     str += "0";
+        // str += second;
+
+        return str;
+    }
     /*
         高京
         2017-08-02
@@ -49,7 +94,9 @@ var functions = {
             }, 100);
         }).blur(function() { //设定输入框失去焦点时的事件
             clearInterval(interval); //清除计时器
-            document.body.scrollTop = bfscrolltop; //将软键盘唤起前的浏览器滚动部分高度重新赋给改变后的高度
+            setTimeout(function() {
+                document.body.scrollTop = bfscrolltop; //将软键盘唤起前的浏览器滚动部分高度重新赋给改变后的高度
+            }, 0);
         });
     },
     /*
@@ -440,7 +487,7 @@ var functions = {
 
 
 if (typeof define === "function" && define.amd) {
-    define(["lib/jquery.min"], function() {
+    define(function() {
         functions.init();
         return functions;
     });

@@ -1,4 +1,4 @@
-# JS类库 v1.0.8
+# JS类库 v1.0.9
 ### 安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -17,6 +17,12 @@
 2. 自动对 ".li_touchstart" 的DOM进行 touchstart mousedown 的监听，功能和示例同上。
 
 高京
+
+1. dateFormat_wx(_date)
+
+        日期格式化_仿微信
+        
+        _date: 日期
 
 1. fix_ios_fixed_bottom_input(dom_selector)
 
@@ -106,6 +112,11 @@
         
 更新日志：
 -------------
+v1.0.9
+
+        1. 增加方法dateFormat_wx
+        2. 去除jquery的依赖
+
 v1.0.8
 
         1. 增加方法fix_ios_fixed_bottom_input
