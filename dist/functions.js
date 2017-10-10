@@ -1,5 +1,5 @@
 ﻿/*
-    1.0.10
+    1.0.11
     高京
     2016-08-29
     JS类库
@@ -80,23 +80,12 @@ var functions = {
             return;
         }
 
-        // alert("ios");
-
-        var interval,
-            footer_input = $(dom_selector),
-            bfscrolltop = document.body.scrollTop; //获取软键盘唤起前浏览器滚动部分的高度
+        var footer_input = $(dom_selector);
 
         footer_input.focus(function() {
-            interval = setInterval(function() { //设置一个计时器，时间设置与软键盘弹出所需时间相近
-                document.body.scrollTop = document.body.scrollHeight; //获取焦点后将浏览器内所有内容高度赋给浏览器滚动部分高度
-                // alert(document.body.scrollTop);
-                // alert(document.body.scrollHeight);
-            }, 100);
-        }).blur(function() { //设定输入框失去焦点时的事件
-            clearInterval(interval); //清除计时器
             setTimeout(function() {
-                document.body.scrollTop = bfscrolltop; //将软键盘唤起前的浏览器滚动部分高度重新赋给改变后的高度
-            }, 0);
+                document.body.scrollTop = document.body.scrollHeight; //获取焦点后将浏览器内所有内容高度赋给浏览器滚动部分高度
+            }, 1500);
         });
     },
     /*

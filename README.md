@@ -1,4 +1,4 @@
-# JS类库 v1.0.10
+# JS类库 v1.0.11
 ### 安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -112,6 +112,10 @@
         
 更新日志：
 -------------
+v1.0.11
+
+        1. 调整fix_ios_fixed_bottom_input的监听，从100毫秒的interval改为1500毫秒的timeout。解决ios11抖动的问题
+
 v1.0.10
 
         1. 修改bug
