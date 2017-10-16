@@ -1,5 +1,5 @@
 ﻿/*
-    1.0.11
+    1.0.12
     高京
     2016-08-29
     JS类库
@@ -184,10 +184,13 @@ var functions = {
                 if (opt.callback)
                     opt.callback();
                 return;
-            } else
-                setTimeout(function() {
-                    set_scrollTop();
-                }, perTime);
+            } else {
+                var stop_toDown_bool = top_per_px >= 0 && (obj.scrollTop() + $(window).height() >= obj[0].scrollHeight);
+                if (!stop_toDown_bool)
+                    setTimeout(function() {
+                        set_scrollTop();
+                    }, perTime);
+            }
         };
 
         set_scrollTop();
