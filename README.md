@@ -1,4 +1,4 @@
-# JS类库 v1.0.13
+# JS类库 v1.0.14
 ### 安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -112,6 +112,10 @@
         
 更新日志：
 -------------
+v1.0.14
+
+        优化fix_ios_fixed_bottom_input方法，增加blur的监听。增加autocheck参数，当h5页面执行$("input").focus()获得焦点后，需要调用此方法并传autocheck参数为true，解决无法进入on("focus")监听的bug
+
 v1.0.13
 
         1. 优化fix_ios_fixed_bottom_input方法，差异化解决ios11、ios非11和安卓。ipad暂未测试

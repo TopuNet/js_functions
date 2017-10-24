@@ -1,5 +1,5 @@
 ﻿/*
-    1.0.13
+    1.0.14
     高京
     2016-08-29
     JS类库
@@ -69,8 +69,11 @@ var functions = {
         2017-08-02
         解决ios端fixed居底input被键盘遮挡的问题
         @dom_selector: 监听focus和blur的Dom的选择器
+        @autocheck: true|false。自动执行innerHeight的改变监听，解决h5页面input.focus()后不能进入.on("focus")的handler的问题。默认false
     */
-    fix_ios_fixed_bottom_input: function(dom_selector) {
+    fix_ios_fixed_bottom_input: function(dom_selector, autocheck) {
+
+        autocheck = autocheck || false;
 
         // IOS版本（安卓则直接退出）
         var regExp = new RegExp(/.+os (\w+?)_\w+_\w+ like mac os x.+ /ig),
@@ -84,23 +87,39 @@ var functions = {
 
         var footer_input = $(dom_selector);
         var interval,
-            window_innerHeight_px = 0,
+            window_innerHeight_px,
             _window_innerHeight_px;
 
         var exec = function() {
 
             _window_innerHeight_px = window.innerHeight;
+
+            // var dt = new Date();
+            // footer_input.val(dt.getTime() + ":" + window_innerHeight_px + " : " + _window_innerHeight_px);
+
+            // 如果innerHeight变化，或者ios版本小于11（ios10 首先innerHeight不会有变化，其次在执行下面代码时，不会有屏闪，所以持续interval除了性能，没有问题）
             if (window_innerHeight_px != _window_innerHeight_px || iosEdition < 11) {
                 document.body.scrollTop = document.body.scrollHeight; //获取焦点后将浏览器内所有内容高度赋给浏览器滚动部分高度
                 window_innerHeight_px = _window_innerHeight_px;
             }
         };
 
-        footer_input.focus(function() {
+        // 初始化window_innerHeight_px，开始interval
+        var focus_handler = function() {
+            window_innerHeight_px = 0;
             interval = setInterval(function() {
                 exec();
             }, 1000);
+        }
+
+        footer_input.on("focus", focus_handler);
+
+        footer_input.on("blur", function() {
+            clearInterval(interval);
         });
+
+        if (autocheck)
+            focus_handler();
     },
     /*
         高京
