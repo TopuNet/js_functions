@@ -1,5 +1,5 @@
 ﻿/*
-    1.0.12
+    1.0.13
     高京
     2016-08-29
     JS类库
@@ -72,20 +72,34 @@ var functions = {
     */
     fix_ios_fixed_bottom_input: function(dom_selector) {
 
-        // 安卓orIOS
-        // var device;
-        if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
-            // device = "ios";
+        // IOS版本（安卓则直接退出）
+        var regExp = new RegExp(/.+os (\w+?)_\w+_\w+ like mac os x.+ /ig),
+            iosEdition = regExp.exec(navigator.userAgent);
+
+        if (iosEdition) {
+            iosEdition = parseInt(iosEdition[1]);
         } else {
             return;
         }
 
         var footer_input = $(dom_selector);
+        var interval,
+            window_innerHeight_px = 0,
+            _window_innerHeight_px;
+
+        var exec = function() {
+
+            _window_innerHeight_px = window.innerHeight;
+            if (window_innerHeight_px != _window_innerHeight_px || iosEdition < 11) {
+                document.body.scrollTop = document.body.scrollHeight; //获取焦点后将浏览器内所有内容高度赋给浏览器滚动部分高度
+                window_innerHeight_px = _window_innerHeight_px;
+            }
+        };
 
         footer_input.focus(function() {
-            setTimeout(function() {
-                document.body.scrollTop = document.body.scrollHeight; //获取焦点后将浏览器内所有内容高度赋给浏览器滚动部分高度
-            }, 1500);
+            interval = setInterval(function() {
+                exec();
+            }, 1000);
         });
     },
     /*

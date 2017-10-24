@@ -1,4 +1,4 @@
-# JS类库 v1.0.12
+# JS类库 v1.0.13
 ### 安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -112,6 +112,10 @@
         
 更新日志：
 -------------
+v1.0.13
+
+        1. 优化fix_ios_fixed_bottom_input方法，差异化解决ios11、ios非11和安卓。ipad暂未测试
+
 v1.0.12
 
         1. 修改scrollTop的小问题
