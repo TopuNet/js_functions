@@ -1,4 +1,4 @@
-# JS类库 v1.0.14
+# JS类库 v1.0.15
 ### 安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -17,6 +17,12 @@
 2. 自动对 ".li_touchstart" 的DOM进行 touchstart mousedown 的监听，功能和示例同上。
 
 高京
+
+1. convers(str)
+
+        过滤表单非法字符
+
+        str: 需要过滤的字符串
 
 1. dateFormat_wx(_date)
 
@@ -112,6 +118,10 @@
         
 更新日志：
 -------------
+v1.0.15
+
+        增加convers方法：过滤表单非法字符
+
 v1.0.14
 
         优化fix_ios_fixed_bottom_input方法，增加blur的监听。增加autocheck参数，当h5页面执行$("input").focus()获得焦点后，需要调用此方法并传autocheck参数为true，解决无法进入on("focus")监听的bug

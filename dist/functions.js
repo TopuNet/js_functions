@@ -1,5 +1,5 @@
 ﻿/*
-    1.0.14
+    1.0.15
     高京
     2016-08-29
     JS类库
@@ -19,6 +19,29 @@ var functions = {
             });
         });
     },
+
+    /*
+        高京
+        2017-10-25
+        过滤表单非法字符
+        @str: 需要过滤的字符串
+    */
+    convers: function(str) {
+
+        var result = str;
+
+        var regExp = new RegExp("\'", "ig");
+        result = result.replace(regExp, "&acute;");
+
+        regExp = new RegExp("\<", "ig");
+        result = result.replace(regExp, "&lt;");
+
+        regExp = new RegExp("\"", "ig");
+        result = result.replace(regExp, "&quot;");
+
+        return result;
+    },
+
     /*
         高京
         2017-08-02
