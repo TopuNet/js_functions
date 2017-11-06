@@ -1,4 +1,4 @@
-# JS类库 v1.0.15
+# JS类库 v1.0.16
 ### 安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -115,9 +115,39 @@
 
          传入字符串。返回字符串长度数值
          Str 字符串
+	 
+苏成闯
+
+1. toDecimalX( tar, x, math )
+
+        小数保留 / 补齐 x 位小数点 
+        tar(String | Number): 目标数
+        x(Number): 保留几位小数点
+        math(String): 可指定处理方式 默认四舍五入 round 
+        #栗子: 
+                toDecimalX(3.245); // 3.25
+                toDecimalX(3); // 3.00
+                toDecimalX(3, 3); // 3.000
+                toDecimalX(3.245, 2, 'floor'); // 3.24
+	 
+2. YMIncreaseOrDecrease( date, type, step )
+
+        返回 前 / 后 X 年 / 月
+        date(String): 目标起始日期
+        type(Number): 操作类型 'year|-'(前几年) 或 'month|+'(后几个月)
+        step(Number): 步数 控制往前 / 后多少的值
+        #栗子: 
+                YMIncreaseOrDecrease('2017-10-31', 'month|-', 1); // 2017-9-30
+                YMIncreaseOrDecrease('2017-10-31', 'month|+', 3); // 2018-1-31
+
         
 更新日志：
 -------------
+v1.0.16
+
+        1. 增加 toDecimalX 方法：小数保留 / 补齐 x 位小数点
+        2. 增加 YMIncreaseOrDecrease 方法：返回目标日期 前 / 后 x 年 / 月 
+	
 v1.0.15
 
         增加convers方法：过滤表单非法字符
@@ -136,7 +166,7 @@ v1.0.12
 
 v1.0.11
 
-        1. 调整fix_ios_fixed_bottom_input的监听，从100毫秒的interval改为1500毫秒的timeout。解决ios11抖动的问题
+        1. 调整fix_ios_fixed_bottom_input的监听，从100毫秒的interval改为1500毫秒的timeout。解决ios11抖动的问题 
 
 v1.0.10
 
