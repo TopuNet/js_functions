@@ -14,7 +14,7 @@
 		
 		<div class="li_click" target="_self" url="http://www.51icb.com"></li>
 
-2. 自动对 ".li_touchstart" 的DOM进行 touchstart mousedown 的监听，功能和示例同上。
+1. 自动对 ".li_touchstart" 的DOM进行 touchstart mousedown 的监听，功能和示例同上。
 
 高京
 
@@ -29,6 +29,10 @@
         日期格式化_仿微信
         
         _date: 日期
+
+1. judge_iphoneX()
+
+        判断设备是不是iphoneX，返回true/false
 
 1. fix_ios_fixed_bottom_input(dom_selector)
 
@@ -130,7 +134,7 @@
                 toDecimalX(3, 3); // 3.000
                 toDecimalX(3.245, 2, 'floor'); // 3.24
 	 
-2. YMIncreaseOrDecrease( date, type, step )
+1. YMIncreaseOrDecrease( date, type, step )
 
         返回 前 / 后 X 年 / 月
         date(String): 目标起始日期
@@ -142,8 +146,12 @@
 
         
 更新日志：
--------------
+-------------    
 v1.0.16
+
+        增加 judge_iphoneX 方法：判断设备是不是iphoneX，返回true/false
+
+v1.0.15 by 苏成闯
 
         1. 增加 toDecimalX 方法：小数保留 / 补齐 x 位小数点
         2. 增加 YMIncreaseOrDecrease 方法：返回目标日期 前 / 后 x 年 / 月 
