@@ -206,6 +206,10 @@ v1.1.1
         2. fix_ios_fixed_bottom_input更改为fix_fixed_bottom_input，目前仅针对iphoneX+微信浏览器处理
         3. 增加judge_mobile_os()，判断移动端设备
         4. 增加judge_MicroMessenger()，判断是否为微信浏览器
+        5. 增加judge_iphoneX_MicroMessenger_changeStyle()，
+        自动为iphoneX+微信浏览器的底部fixed盒增加bottom值；相应的增加bottom值变量iphoneX_bottom_space_px，可以外部调用时修改
+        6. 增加【需要完善】fix_h5_input_focus_position，解决页面中文档流内input被键盘遮挡的问题，目前只处理安卓设备（ios本身没问题）
+        7. 在引用此js后，不再自动执行对li_click/li_touchstart的监听，需要手动执行li_click_Listener()，可反复执行。
 
 v1.0.16
 
