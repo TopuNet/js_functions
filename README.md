@@ -1,4 +1,4 @@
-# JS类库 v1.0.16
+# JS类库 v1.1.1
 ### 安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -7,14 +7,6 @@
 
 方法列表：
 -------------
-
-1. 自动对 ".li_click" 的DOM进行 click 监听，并根据target和url参数进行页面跳转。如：
-
-		<li class="li_click" target="_blank" url="http://www.topu.net"></li>
-		
-		<div class="li_click" target="_self" url="http://www.51icb.com"></li>
-
-1. 自动对 ".li_touchstart" 的DOM进行 touchstart mousedown 的监听，功能和示例同上。
 
 高京
 
@@ -30,15 +22,51 @@
         
         _date: 日期
 
+1. judge_mobile_os()
+
+        判断mobile系统，返回 ios | android | others
+
+1. iphoneX_bottom_space_px
+
+        iphoneX底部需要空出来的高度(px)
+
+1. judge_iphoneX_MicroMessenger_changeStyle(opt)
+
+        给iphoneX+微信浏览器：修改底部fixed盒的bottom；增加占位遮罩层；修改文档流内的占位盒高度
+        建议默认将底部fixed盒隐藏，回调中显示
+
+        opt = {
+            bottom_fixed_selector: "", // 底部fixed盒的选择器，此盒将被修改bottom，无默认值
+            document_fixed_space_selector: "", // 文档流内的占位盒选择器，此盒将被增加高度，无默认值
+            fixed_space_div_bgColor: "#fff", // 底部新建占位遮罩盒的背景色，默认"#fff"，建议和页面背景色一致，以免穿帮
+            callback: function(fixed_space_div) { // 回调(新建的底部占位遮罩层||undefined)，无论是否为iphoneX+微信浏览器都会执行
+                fixed_space_div && fixed_space_div.css({
+                    "background": "#000"
+                });
+            } 
+        }
+
 1. judge_iphoneX()
 
         判断设备是不是iphoneX，返回true/false
 
-1. fix_ios_fixed_bottom_input(dom_selector)
+1. judge_MicroMessenger()
+        
+        判断是不是微信浏览器 (true/false)
 
-        解决ios端fixed居底input被键盘遮挡的问题
+1. fix_fixed_bottom_input(opt)
 
-        dom_selector: 监听focus和blur的Dom的选择器
+        解决 h5页面 fixed居底input被键盘遮挡的问题
+        
+        2018-01-14：
+        iphoneX(测试版本11.2.2)+微信浏览器：fixed居底的input移动到顶部
+        其他环境不处理
+
+        @opt = {
+            dom_selector, // 监听focus和blur的Dom的选择器
+            autocheck: false, // 自动执行innerHeight的改变监听，解决h5页面input.focus()后不能进入.on("focus")的handler的问题。默认false
+            callback // 执行完focus_handler和blur_handler的回调
+        }
 
 1. calculate(kind, cal1, cal2)
         
@@ -98,6 +126,13 @@
 
         自动获得地址栏参数集，并拼接返回为地址栏字符串：a=1&b=2&c=3
         Para：过滤掉的参数名（键），多个用|分隔，区分大小写
+
+1. li_click_Listener()
+
+        li_click的点击事件转向方法
+
+        @2018-01-18 高京
+        在需要监听li_click或li_touchstart盒的页面，需要自行执行li_click_Listener方法进行监听
         
 1. includeJS(path)
 
@@ -144,9 +179,34 @@
                 YMIncreaseOrDecrease('2017-10-31', 'month|-', 1); // 2017-9-30
                 YMIncreaseOrDecrease('2017-10-31', 'month|+', 3); // 2018-1-31
 
+胡天培
+
+1. 【需要完善】fix_h5_input_focus_position(opt)
+
+        解决移动端h5页面文档流中input和textarea获得焦点后被键盘遮挡的bug
+        目前的思路是将焦点滚动到一个安全的可视位置
+        ios 10/11.2 可测。11.1实在找不到
+        android 尽量多机型和系统
+
+        2018-01-08 胡天培
+        ios问题不大，只处理安卓
+
+        @opt = {
+            Listener_selector: "",   //监听focus的dom选择器，默认"input,textarea"
+            OutBox_selector:"",      //包裹被监听元素的最外层选择器，高度为屏幕高度的元素 无默认
+            scroll_selector:"",      //向上滚动的核选择器 默认为：body
+        }
+
         
 更新日志：
--------------    
+-------------
+v1.1.1
+
+        1. 规范版本号，升级至1.1.1。有bug再更改bug版本，新功能升级子版本
+        2. fix_ios_fixed_bottom_input更改为fix_fixed_bottom_input，目前仅针对iphoneX+微信浏览器处理
+        3. 增加judge_mobile_os()，判断移动端设备
+        4. 增加judge_MicroMessenger()，判断是否为微信浏览器
+
 v1.0.16
 
         增加 judge_iphoneX 方法：判断设备是不是iphoneX，返回true/false
