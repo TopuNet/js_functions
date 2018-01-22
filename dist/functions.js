@@ -198,7 +198,6 @@ var functions = {
 
         @opt = {
             Listener_selector: "",   //监听focus的dom选择器，默认"input,textarea"
-            OutBox_selector:"",      //包裹被监听元素的最外层选择器，高度为屏幕高度的元素 无默认
             wrapper_selector:"",      //最外盒选择器，如.wrapper或body 默认为：body
         }
     */

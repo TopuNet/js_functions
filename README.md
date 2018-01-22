@@ -181,7 +181,7 @@
 
 胡天培
 
-1. 【需要完善】fix_h5_input_focus_position(opt)
+1. fix_h5_input_focus_position(opt)
 
         解决移动端h5页面文档流中input和textarea获得焦点后被键盘遮挡的bug
         目前的思路是将焦点滚动到一个安全的可视位置
@@ -193,7 +193,6 @@
 
         @opt = {
             Listener_selector: "",   //监听focus的dom选择器，默认"input,textarea"
-            OutBox_selector:"",      //包裹被监听元素的最外层选择器，高度为屏幕高度的元素 无默认
             scroll_selector:"",      //向上滚动的核选择器 默认为：body
         }
 
