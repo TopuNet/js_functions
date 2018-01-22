@@ -1,5 +1,5 @@
 ﻿/*
-    1.1.1
+    1.1.2
     高京
     2016-08-29
     JS类库
@@ -149,10 +149,11 @@ var functions = {
                 .appendTo($("body"));
 
             // 调整文档流内的占位盒高度
-            var document_fixed_space_obj = $(opt.document_fixed_space_selector)
-            document_fixed_space_obj.length > 0 && document_fixed_space_obj.css({
-                "height": (parseFloat(document_fixed_space_obj.css("height").replace("px", "")) + that.iphoneX_bottom_space_px).toString() + "px"
-            });
+            var document_fixed_space_obj = $(opt.document_fixed_space_selector);
+            if (document_fixed_space_obj.length > 0)
+                document_fixed_space_obj.css({
+                    "height": (parseFloat(document_fixed_space_obj.css("height").replace("px", "")) + that.iphoneX_bottom_space_px).toString() + "px"
+                });
         }
 
         if (opt.callback)
@@ -198,7 +199,7 @@ var functions = {
         @opt = {
             Listener_selector: "",   //监听focus的dom选择器，默认"input,textarea"
             OutBox_selector:"",      //包裹被监听元素的最外层选择器，高度为屏幕高度的元素 无默认
-            scroll_selector:"",      //向上滚动的核选择器 默认为：body
+            wrapper_selector:"",      //最外盒选择器，如.wrapper或body 默认为：body
         }
     */
     fix_h5_input_focus_position: function(opt) {
@@ -221,41 +222,21 @@ var functions = {
             var os = that.judge_mobile_os();
             if (os == "android") {
 
-                //获得页面可视区域的高度
-                var _height = $(window).height();
-
-                //将外盒的高度设为此高度
-                $(opt.OutBox_selector).css("height", _height + "px");
-
-                //包裹监听元素的外盒对象
-                var OutBox_selector_obj = $(opt.OutBox_selector);
-                OutBox_selector_obj.css({
-                    "transition": "all .2s"
-                });
-
-                //获取当前获取焦点的input
-                var clickObj = $(opt.Listener_selector);
+                // 获得最外盒对象
+                var wrapper_obj = $(opt.wrapper_selector);
+                if (wrapper_obj.length === 0)
+                    return;
 
                 //获取已滚动的距离
-                var scrollTop;
+                var scrollTop_old_px = wrapper_obj.scrollTop();
 
-                //获得距离顶部的高度
-                var Top;
+                //获取focus元素距离document顶部的距离
+                var focus_dom_top_px = $(this).offset().top;
 
-                //获取焦点时
-                clickObj.on("focus", function() {
-
-                    //获取向上滚动的距离
-                    scrollTop = $(".wrapper").scrollTop();
-
-                    //获取元素距离顶部的距离
-                    Top = $(this).offset().top;
-
-                    setTimeout(function() {
-                        //向上滚动一定距离
-                        $(opt.scroll_selector).scrollTop(scrollTop + Top - 100);
-                    }, 1000);
-                });
+                setTimeout(function() {
+                    //最外盒向上滚动，让focus盒到预期位置
+                    wrapper_obj.scrollTop(scrollTop_old_px + focus_dom_top_px - 100);
+                }, 1000);
             }
         };
 
@@ -581,7 +562,7 @@ var functions = {
             catch (ee) {
                 $("#link_new_window span").click();
             }
-        }
+        };
 
         $(".li_touchstart").unbind("touchstart mousedown").on("touchstart mousedown", function(e) {
             e.preventDefault();
