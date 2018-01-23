@@ -1,4 +1,4 @@
-# JS类库 v1.1.2
+# JS类库 v1.1.3
 ### 安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -199,6 +199,10 @@
         
 更新日志：
 -------------
+v1.1.3
+
+        1. 修正li_click_Listener方法的bug
+
 v1.1.2
 
         1. 修正上一个版本增加的方法 fix_h5_input_focus_position 留存的小问题

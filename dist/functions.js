@@ -1,5 +1,5 @@
 ﻿/*
-    1.1.2
+    1.1.3
     高京
     2016-08-29
     JS类库
@@ -565,11 +565,11 @@ var functions = {
 
         $(".li_touchstart").unbind("touchstart mousedown").on("touchstart mousedown", function(e) {
             e.preventDefault();
-            functions.li_click($(this));
+            handler();
         });
 
         $(".li_click").unbind("click").on("click", function() {
-            functions.li_click($(this));
+            handler();
         });
     },
 
