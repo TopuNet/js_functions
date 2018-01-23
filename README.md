@@ -1,4 +1,4 @@
-# JS类库 v1.1.3
+# JS类库 v1.1.4
 ### 安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -129,7 +129,7 @@
 
 1. li_click_Listener()
 
-        li_click的点击事件转向方法
+        li_click和li_touchstart盒的监听，自动跳转
 
         @2018-01-18 高京
         在需要监听li_click或li_touchstart盒的页面，需要自行执行li_click_Listener方法进行监听
@@ -199,6 +199,10 @@
         
 更新日志：
 -------------
+v1.1.4
+
+        1. 修正li_click_Listener方法的bug
+
 v1.1.3
 
         1. 修正li_click_Listener方法的bug

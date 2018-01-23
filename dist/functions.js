@@ -1,5 +1,5 @@
 ﻿/*
-    1.1.3
+    1.1.4
     高京
     2016-08-29
     JS类库
@@ -539,17 +539,18 @@ var functions = {
     /*
         @高京
         @20150909
-        li_click的点击事件转向方法
+        li_click和li_touchstart盒的监听，自动跳转
 
         @2018-01-18 高京
         在需要监听li_click或li_touchstart盒的页面，需要自行执行li_click_Listener方法进行监听
      */
     li_click_Listener: function() {
 
-        var handler = function(selector) {
+        // @dom_obj：点击的盒对象
+        var handler = function(dom_obj) {
 
             $("#link_new_window").remove();
-            $("body").append("<a id=\"link_new_window\" href=\"" + $(selector).attr("url") + "\" target=\"" + $(selector).attr("target") + "\" style=\"cursor:pointer\"><span></span></a>");
+            $("body").append("<a id=\"link_new_window\" href=\"" + dom_obj.attr("url") + "\" target=\"" + dom_obj.attr("target") + "\" style=\"cursor:pointer\"><span></span></a>");
             //safari
             try {
                 var e = document.createEvent('MouseEvent');
@@ -565,11 +566,11 @@ var functions = {
 
         $(".li_touchstart").unbind("touchstart mousedown").on("touchstart mousedown", function(e) {
             e.preventDefault();
-            handler();
+            handler($(this));
         });
 
         $(".li_click").unbind("click").on("click", function() {
-            handler();
+            handler($(this));
         });
     },
 
