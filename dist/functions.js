@@ -1,5 +1,5 @@
 ﻿/*
-    1.1.4
+    1.1.5
     高京
     2016-08-29
     JS类库
@@ -605,15 +605,25 @@ var functions = {
      *@高京
      *@20151023
      *获得地址栏参数集，返回JSON对象
+
+     * 高京 2018-01-24 更新。正则拆解，返回json对象
      */
     getQueryParas: function() {
 
-        var Json_obj;
+        var query = decodeURI(location.search.substring(1)),
+            query_j = {};
+        // alert(query);
+        var regExp = new RegExp("(.+?)=(.+?)(?:\&|$)", "ig");
+        var result;
 
-        var str = functions.getQueryParas_str(1, "");
-        Json_obj = JSON.parse(str);
+        while (true) {
+            result = regExp.exec(query);
+            if (!result)
+                break;
+            query_j[result[1]] = result[2];
+        }
 
-        return Json_obj;
+        return query_j;
     },
 
     /*

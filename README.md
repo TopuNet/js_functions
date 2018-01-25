@@ -1,4 +1,4 @@
-# JS类库 v1.1.4
+# JS类库 v1.1.5
 ### 安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -199,6 +199,10 @@
         
 更新日志：
 -------------
+v1.1.5
+
+        1. 更新getQueryParas方法。
+
 v1.1.4
 
         1. 修正li_click_Listener方法的bug
