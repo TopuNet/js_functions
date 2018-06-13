@@ -1,5 +1,5 @@
 ﻿/*
-    1.1.5
+    1.1.6
     高京
     2016-08-29
     JS类库
@@ -128,7 +128,7 @@ var functions = {
         opt = $.extend(opt_default, opt);
 
         var bottom_fixed_space_div;
-        if (that.judge_iphoneX() && that.judge_MicroMessenger()) {
+        if (that.judge_iphoneX() && that.judge_MicroMessenger() && window.history.length === 1) {
 
             // 设置底部fixed盒的bottom
             $(opt.bottom_fixed_selector).css({

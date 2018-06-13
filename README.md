@@ -1,4 +1,4 @@
-# JS类库 v1.1.5
+# JS类库 v1.1.6
 ### 安装：npm install TopuNet-js-functions
 
 文件结构：
@@ -199,6 +199,10 @@
         
 更新日志：
 -------------
+v1.1.6
+
+        1. 修改iphoneX适配方案，迎合新版微信
+
 v1.1.5
 
         1. 更新getQueryParas方法。
